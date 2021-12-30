@@ -1,0 +1,58 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+#define SIZE 10000
+void insertionsort(int a[],int n)
+{
+    int i,j,key;
+    for (i=1;i<=n;i++)
+    {
+        key=a[i];
+        j=i-1;
+        while(j>=0 && a[j]>key)
+        {
+            a[j+1]=a[j];
+            j--;
+        }
+        a[j+1]=key;
+    }
+}
+void printArray(int a[],int n)
+{
+   int i;
+   for (i=0;i<n;i++)
+       printf("%d ", a[i]);
+   printf("\n");
+}
+int main()
+{
+      int i,n;
+     long int a[SIZE];
+
+    clock_t begin, end;
+
+   FILE *fptr;
+    //clock_t begin, end;
+    fptr = fopen("program1.txt","w");
+    printf("Enter the array size you want\n");
+   scanf("%d",&n);
+   printf("the input number are\n");
+    for (i=0;i<n;i++)
+    {
+      fprintf(fptr,"%d, ",rand()%1000);
+    }
+   fclose(fptr);
+   fptr = fopen("program1.txt","r");
+   fscanf(fptr,"%d",&a[i]);
+  begin = clock();
+     insertionsort(a,n);
+     fptr=fopen("output.text","w");
+     for (i=0;i<n;i++)
+     {
+           fprintf(fptr,"%d, ",a[i]);
+     }
+  end = clock();
+
+      printf ("the execution time is %.4f",(double)(end - begin) * 1000.0 / CLOCKS_PER_SEC );
+     return 0;
+}

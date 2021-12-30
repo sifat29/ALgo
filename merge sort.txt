@@ -1,0 +1,73 @@
+#include <stdio.h>
+#include<stdlib.h>
+#define max 10
+#define max2 1000
+int a[10];
+int b[10];
+
+void merging(int low, int mid, int high) {
+   int left, right, i;
+
+   for(left = low, right = mid + 1, i = low; left <= mid && right <= high; i++) {
+      if(a[left] <= a[right])
+         b[i] = a[left++];
+      else
+         b[i] = a[right++];
+   }
+
+   while(left <= mid)
+      b[i++] = a[right++];
+
+   while(right <= high)
+      b[i++] = a[right++];
+
+   for(i = low; i <= high; i++)
+      a[i] = b[i];
+}
+
+void sort(int low, int high) {
+   int mid;
+
+   if(low < high) {
+      mid = (low + high) / 2;
+      sort(low, mid);
+      sort(mid+1, high);
+      merging(low, mid, high);
+   } else {
+      return;
+   }
+}
+
+int main() 
+{ 
+    file *fp,*fp1,*fp2;
+    int i,n;
+    
+  printf("Enter how many numbers you want to take");
+  scanf("%d",&n);
+ printf("give input for sorting\n");
+      for(i = 0; i <= n; i++)
+      {
+      scanf("%d",&a[i]);
+      }
+ printf("List before sorting\n");
+   for(i = 0; i <=n; i++)
+   {
+      printf("%d ",a[i]);
+   }
+
+   sort(0,n);
+
+   printf("\nList after sorting\n");
+
+   for(i = 0; i <= n; i++)
+      printf("%d ", a[i]);
+      printf("now for 1m");
+      fp=fopen("mergeinput.txt","w");
+      for(i=0;i<max2;i++)
+      {
+          fscanf(fp,"%d",&a[i]);
+      }
+      
+      
+}

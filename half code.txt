@@ -1,0 +1,25 @@
+int main()
+{
+     FILE *fptr;
+    clock_t begin, end;
+    int a[SIZE],n,i;
+    fptr = fopen("program.txt","w");
+    printf("Enter the array size you want\n");
+    scanf("%d",&n);
+    //printf("the input number are\n");
+    for (i=0;i<n;i++)
+    {
+      fprintf(fptr,"%d, ",rand()%1000);
+    }
+    fclose(fptr);
+    int* num = "program.txt";
+    fptr = fopen(num, "r");
+    if (fptr == NULL)
+        {
+        printf("Could not open file %d",num);
+        return 1;
+    }
+    fscanf(fptr,"%d", num);
+
+    printf("Data from the file:\n%d", num);
+    fclose(fptr);
